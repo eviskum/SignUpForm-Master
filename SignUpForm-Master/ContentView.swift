@@ -22,9 +22,20 @@ struct ContentView: View {
 
     var body: some View {
         NavigationView {
-            SignUpView(completion: { username, password in
+//            SignUpFullnameView(usernameValidationType: .email(checkUsername),
+//                       completion: { fullname, username, password in
+//                        print("Username: \(username) Password: \(password)")
+//                    })
+//                .navigationTitle("Sign Up")
+            SignInView(usernameValidationType: .email(checkUsername),
+                       resetPwdCompletion: { username in
+                        print("Reset email til: \(username)")
+                        return ResetPwdStatus.success
+                       },
+                       signInCompletion: { username, password in
                         print("Username: \(username) Password: \(password)")
-                    }, usernameValidationType: .email(checkUsername))
+                        return SignInStatus.success
+                    })
                 .navigationTitle("Sign Up")
         }
     }
